@@ -22,6 +22,9 @@ export default function TripForm({ onSubmit, loading }: Props) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const maxEndDate = format(addDays(new Date(startDate), 365), 'yyyy-MM-dd');
+  const minEndDate = format(addDays(new Date(startDate), 1), 'yyyy-MM-dd');
+
   const nights = Math.max(1, differenceInDays(new Date(endDate), new Date(startDate)));
 
   const fetchSuggestions = async (value: string) => {
@@ -106,12 +109,32 @@ export default function TripForm({ onSubmit, loading }: Props) {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
         <div>
           <div style={{ fontSize: 10, fontWeight: 700, color: 'rgba(44,26,14,0.7)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>Depart</div>
-          <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
+          <input type="date" value={startDate} min={today} onChange={e => {
+            const newStart = e.target.value;
+            setStartDate(newStart);
+            if (endDate <= newStart) {
+              setEndDate(format(addDays(new Date(newStart), 1), 'yyyy-MM-dd'));
+            }
+          }}
             style={{ width: '100%', padding: '12px 10px', borderRadius: 10, border: '1px solid rgba(44,26,14,0.25)', background: '#fff', fontSize: 13, color: '#2C1A0E', outline: 'none', fontFamily: 'inherit' }} />
         </div>
         <div>
           <div style={{ fontSize: 10, fontWeight: 700, color: 'rgba(44,26,14,0.7)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>Return</div>
-          <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}
+          <input type="date" value={endDate} min={minEndDate} max={maxEndDate} onChange={e => {
+            const newEnd = e.target.value;
+            if (newEnd <= startDate) {
+              setError('Return date must be after departure');
+              return;
+            }
+            const maxEnd = format(addDays(new Date(startDate), 365), 'yyyy-MM-dd');
+            if (newEnd > maxEnd) {
+              setEndDate(maxEnd);
+              setError('Maximum trip length is 1 year');
+              return;
+            }
+            setEndDate(newEnd);
+            setError('');
+          }}
             style={{ width: '100%', padding: '12px 10px', borderRadius: 10, border: '1px solid rgba(44,26,14,0.25)', background: '#fff', fontSize: 13, color: '#2C1A0E', outline: 'none', fontFamily: 'inherit' }} />
         </div>
       </div>

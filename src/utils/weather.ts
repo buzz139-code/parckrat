@@ -6,11 +6,12 @@ const WEATHER_API = 'https://api.open-meteo.com/v1/forecast';
 const CLIMATE_TTL = 24 * 60 * 60 * 1000;
 
 async function geocode(city: string): Promise<{ lat: number; lon: number; name: string } | null> {
-  const key = `packrat_geo_${city.toLowerCase().trim()}`;
+  const cityName = city.split(',')[0].trim();
+  const key = `packrat_geo_${cityName.toLowerCase()}`;
   const cached = localStorage.getItem(key);
   if (cached) return JSON.parse(cached);
   try {
-    const res = await fetch(`${GEO_API}?name=${encodeURIComponent(city)}&count=1&language=en&format=json`);
+    const res = await fetch(`${GEO_API}?name=${encodeURIComponent(cityName)}&count=1&language=en&format=json`);
     if (!res.ok) return null;
     const data = await res.json();
     const r = data.results?.[0];
