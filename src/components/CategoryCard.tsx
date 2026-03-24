@@ -31,11 +31,11 @@ export default function CategoryCard({ category, items, onToggle, onRemove, onQu
       <div style={{ padding: '12px 14px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <span style={{ fontSize: 11, fontWeight: 700, color: '#2C1A0E', textTransform: 'uppercase', letterSpacing: '0.07em' }}>{category}</span>
-          <span style={{ fontSize: 10, color: 'rgba(44,26,14,0.35)' }}>{items.length} items</span>
+          <span style={{ fontSize: 10, color: 'rgba(44,26,14,0.7)' }}>{items.length} items</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           {packed > 0 && <span style={{ fontSize: 10, color: '#8B4513', fontWeight: 700 }}>{packed}/{items.length}</span>}
-          <button onClick={() => setAdding(!adding)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, color: 'rgba(44,26,14,0.3)' }}>
+          <button onClick={() => setAdding(!adding)} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 2, color: 'rgba(44,26,14,0.7)' }}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 2v10M2 7h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
@@ -43,7 +43,7 @@ export default function CategoryCard({ category, items, onToggle, onRemove, onQu
         </div>
       </div>
 
-      <div style={{ height: 2, background: 'rgba(44,26,14,0.05)', margin: '10px 14px 0' }}>
+      <div style={{ height: 2, background: 'rgba(44,26,14,0.15)', margin: '10px 14px 0' }}>
         {items.length > 0 && <div style={{ height: 2, background: '#8B4513', width: `${(packed / items.length) * 100}%`, transition: 'width 0.3s' }} />}
       </div>
 
@@ -57,13 +57,13 @@ export default function CategoryCard({ category, items, onToggle, onRemove, onQu
         ))}
 
         {adding && (
-          <div style={{ display: 'flex', gap: 6, marginTop: 8, paddingTop: 8, borderTop: '1px solid rgba(44,26,14,0.06)' }}>
+          <div style={{ display: 'flex', gap: 6, marginTop: 8, paddingTop: 8, borderTop: '1px solid rgba(44,26,14,0.2)' }}>
             <input autoFocus placeholder="Item name..." value={newName} onChange={e => setNewName(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleAdd()}
-              style={{ flex: 1, padding: '6px 10px', borderRadius: 6, border: '1px solid rgba(44,26,14,0.12)', fontSize: 12, color: '#2C1A0E', background: '#faf8f3', outline: 'none', fontFamily: 'inherit' }} />
+              style={{ flex: 1, padding: '6px 10px', borderRadius: 6, border: '1px solid rgba(44,26,14,0.25)', fontSize: 12, color: '#2C1A0E', background: '#faf8f3', outline: 'none', fontFamily: 'inherit' }} />
             <input placeholder="Qty" value={newQty} onChange={e => setNewQty(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleAdd()}
-              style={{ width: 48, padding: '6px 8px', borderRadius: 6, border: '1px solid rgba(44,26,14,0.12)', fontSize: 12, color: '#2C1A0E', background: '#faf8f3', outline: 'none', fontFamily: 'inherit', textAlign: 'center' }} />
+              style={{ width: 48, padding: '6px 8px', borderRadius: 6, border: '1px solid rgba(44,26,14,0.25)', fontSize: 12, color: '#2C1A0E', background: '#faf8f3', outline: 'none', fontFamily: 'inherit', textAlign: 'center' }} />
             <button onClick={handleAdd} style={{ background: '#8B4513', border: 'none', borderRadius: 6, padding: '6px 10px', color: '#F5F0E8', fontSize: 12, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' }}>Add</button>
           </div>
         )}

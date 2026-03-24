@@ -42,6 +42,7 @@ export type ItemCategory =
 export interface PackingItemData {
   id: string;
   name: string;
+  descriptor?: string;
   quantity: string;
   category: ItemCategory;
   packed: boolean;

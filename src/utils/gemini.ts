@@ -41,8 +41,9 @@ Return ONLY valid JSON, no markdown, no explanation:
 {
   "items": [
     {
-      "name": "string",
-      "quantity": "string",
+      "name": "generic item name only, no materials or adjectives (e.g. 'T-shirts', 'Trousers', 'Jacket', 'Sunscreen')",
+      "descriptor": "optional material or style note, 1-3 words max (e.g. 'moisture-wicking', 'lightweight linen', 'waterproof', 'SPF 50+'). Use null if no specific recommendation.",
+      "quantity": "practical quantity for the trip (e.g. '3', '2 pairs', '1 bottle', 'enough for the trip')",
       "category": "Clothing|Footwear|Toiletries|Electronics|Documents|Health|Accessories|Other",
       "weatherDriven": boolean
     }
@@ -62,6 +63,7 @@ Return ONLY valid JSON, no markdown, no explanation:
   return (data.items || []).map((item: any, idx: number) => ({
     id: `item_${idx}_${Date.now()}`,
     name: item.name || '',
+    descriptor: item.descriptor || undefined,
     quantity: item.quantity || '1',
     category: (item.category as ItemCategory) || 'Other',
     packed: false,

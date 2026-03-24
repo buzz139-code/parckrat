@@ -8,6 +8,7 @@ export function buildShareUrl(trip: TripInput, items: PackingItemData[]): string
     t: trip.tripTypes,
     i: items.map(item => ({
       n: item.name,
+      d: item.descriptor || null,
       q: item.quantity,
       c: item.category,
       p: item.packed ? 1 : 0,
@@ -33,6 +34,7 @@ export function parseShareUrl(): { trip: TripInput; items: PackingItemData[] } |
     const items: PackingItemData[] = state.i.map((item: any, idx: number) => ({
       id: `shared_${idx}`,
       name: item.n,
+      descriptor: item.d || undefined,
       quantity: item.q,
       category: item.c,
       packed: item.p === 1,

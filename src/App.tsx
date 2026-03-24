@@ -92,12 +92,12 @@ export default function App() {
         <div style={{ paddingTop: 24, paddingBottom: 20, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div>
             <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.03em', color: '#2C1A0E' }}>packrat</div>
-            <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.4)', fontWeight: 500, marginTop: 1 }}>weather-smart packing lists</div>
+            <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.7)', fontWeight: 500, marginTop: 1 }}>weather-smart packing lists</div>
           </div>
           {appState === 'list' && trip && (
             <button
               onClick={() => { setAppState('input'); setItems([]); setWeather(null); setTrip(null); }}
-              style={{ fontSize: 12, color: 'rgba(44,26,14,0.5)', background: 'none', border: '1px solid rgba(44,26,14,0.12)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', fontFamily: 'inherit' }}
+              style={{ fontSize: 12, color: 'rgba(44,26,14,0.7)', background: 'none', border: '1px solid rgba(44,26,14,0.25)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', fontFamily: 'inherit' }}
             >
               New trip
             </button>
@@ -109,7 +109,7 @@ export default function App() {
           <div style={{ paddingTop: 60, textAlign: 'center' }}>
             <div style={{ width: 36, height: 36, border: '3px solid rgba(44,26,14,0.1)', borderTopColor: '#8B4513', borderRadius: '50%', animation: 'spin 0.8s linear infinite', margin: '0 auto 16px' }} />
             <div style={{ fontSize: 14, fontWeight: 500, color: '#2C1A0E', marginBottom: 4 }}>Checking weather...</div>
-            <div style={{ fontSize: 12, color: 'rgba(44,26,14,0.4)' }}>Building your list with Gemini</div>
+            <div style={{ fontSize: 12, color: 'rgba(44,26,14,0.7)' }}>Building your list with Gemini</div>
             <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
           </div>
         )}
@@ -118,7 +118,7 @@ export default function App() {
         {appState === 'input' && (
           <div>
             {error && (
-              <div style={{ marginBottom: 16, padding: '10px 14px', background: 'rgba(153,27,27,0.06)', border: '1px solid rgba(153,27,27,0.15)', borderRadius: 8, fontSize: 13, color: '#991b1b' }}>
+              <div style={{ marginBottom: 16, padding: '10px 14px', background: 'rgba(153,27,27,0.1)', border: '1px solid rgba(153,27,27,0.25)', borderRadius: 8, fontSize: 13, color: '#991b1b' }}>
                 {error}
               </div>
             )}
@@ -134,7 +134,7 @@ export default function App() {
             )}
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.4)', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 700 }}>
+              <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.7)', textTransform: 'uppercase', letterSpacing: '0.07em', fontWeight: 700 }}>
                 {trip.tripTypes.join(' · ')}
               </div>
               <ShareButton trip={trip} items={items} />

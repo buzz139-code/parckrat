@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { type WeatherData } from '../types';
 
 const GEO_API = 'https://geocoding-api.open-meteo.com/v1/search';
@@ -45,7 +46,22 @@ export async function fetchWeather(city: string, startDate: string, endDate: str
   const geo = await geocode(city);
   if (!geo) return null;
 
-  const cacheKey = `packrat_weather_${geo.lat}_${geo.lon}_${startDate}_${endDate}`;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const maxForecastDate = new Date(today);
+  maxForecastDate.setDate(today.getDate() + 15);
+
+  const tripStart = new Date(startDate);
+  const tripEnd = new Date(endDate);
+
+  const fetchStart = tripStart > maxForecastDate
+    ? format(today, 'yyyy-MM-dd')
+    : startDate;
+  const fetchEnd = tripEnd > maxForecastDate
+    ? format(maxForecastDate, 'yyyy-MM-dd')
+    : endDate;
+
+  const cacheKey = `packrat_weather_${geo.lat}_${geo.lon}_${fetchStart}_${fetchEnd}`;
   const cached = localStorage.getItem(cacheKey);
   if (cached) {
     const parsed = JSON.parse(cached);
@@ -53,7 +69,7 @@ export async function fetchWeather(city: string, startDate: string, endDate: str
   }
 
   try {
-    const url = `${WEATHER_API}?latitude=${geo.lat}&longitude=${geo.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&start_date=${startDate}&end_date=${endDate}&timezone=auto`;
+    const url = `${WEATHER_API}?latitude=${geo.lat}&longitude=${geo.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weathercode&start_date=${fetchStart}&end_date=${fetchEnd}&timezone=auto`;
     const res = await fetch(url);
     if (!res.ok) return null;
     const data = await res.json();
