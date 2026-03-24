@@ -94,14 +94,48 @@ export default function App() {
             <div style={{ fontSize: 22, fontWeight: 700, letterSpacing: '-0.03em', color: '#2C1A0E' }}>packrat</div>
             <div style={{ fontSize: 11, color: 'rgba(44,26,14,0.7)', fontWeight: 500, marginTop: 1 }}>weather-smart packing lists</div>
           </div>
-          {appState === 'list' && trip && (
-            <button
-              onClick={() => { setAppState('input'); setItems([]); setWeather(null); setTrip(null); }}
-              style={{ fontSize: 12, color: 'rgba(44,26,14,0.7)', background: 'none', border: '1px solid rgba(44,26,14,0.25)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', fontFamily: 'inherit' }}
-            >
-              New trip
-            </button>
-          )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            {appState === 'list' && trip && (
+              <button
+                onClick={() => { setAppState('input'); setItems([]); setWeather(null); setTrip(null); }}
+                style={{ fontSize: 12, color: 'rgba(44,26,14,0.7)', background: 'none', border: '1px solid rgba(44,26,14,0.25)', borderRadius: 8, padding: '6px 12px', cursor: 'pointer', fontFamily: 'inherit' }}
+              >
+                New trip
+              </button>
+            )}
+            <svg width="56" height="56" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Tail */}
+              <path d="M 18 34 C 8 34 4 24 12 20 C 16 18 18 22 14 24" stroke="#2C1A0E" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+              {/* Back Ear */}
+              <circle cx="32" cy="14" r="5" fill="#2C1A0E"/>
+              {/* Legs */}
+              <path d="M 22 36 L 22 42 M 28 36 L 28 42" stroke="#2C1A0E" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+              {/* Feet */}
+              <path d="M 22 42 L 26 42 M 28 42 L 32 42" stroke="#2C1A0E" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+              {/* Body */}
+              <path d="M 18 36 C 14 22 22 14 30 18 C 36 21 40 25 38 28 C 36 31 30 29 28 36 Z" fill="#2C1A0E"/>
+              {/* Front Ear */}
+              <circle cx="26" cy="16" r="6" fill="#2C1A0E"/>
+              <circle cx="26" cy="16" r="3" fill="#F5F0E8"/>
+              {/* Eye */}
+              <circle cx="34" cy="22" r="1.5" fill="#F5F0E8"/>
+              {/* Nose */}
+              <circle cx="39" cy="27" r="1.5" fill="#8B4513"/>
+              {/* Whiskers */}
+              <path d="M 38 26 L 44 24 M 38 27 L 45 27 M 38 28 L 44 30" stroke="#2C1A0E" strokeWidth="1" strokeLinecap="round" fill="none"/>
+              {/* Suitcase */}
+              <rect x="4" y="24" width="12" height="14" rx="1.5" fill="#8B4513"/>
+              {/* Suitcase straps */}
+              <rect x="6" y="24" width="1.5" height="14" fill="#2C1A0E" opacity="0.6"/>
+              <rect x="12.5" y="24" width="1.5" height="14" fill="#2C1A0E" opacity="0.6"/>
+              {/* Suitcase corner patches */}
+              <path d="M 4 27 V 24 H 7 M 16 27 V 24 H 13 M 4 35 V 38 H 7 M 16 35 V 38 H 13" stroke="#2C1A0E" strokeWidth="1.5" fill="none"/>
+              {/* Suitcase handle */}
+              <path d="M 8 24 V 22 C 8 21 9 20 10 20 C 11 20 12 21 12 22 V 24" stroke="#2C1A0E" strokeWidth="2" fill="none"/>
+              {/* Arm */}
+              <path d="M 26 26 Q 18 28 10 20" stroke="#2C1A0E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+            </svg>
+          </div>
         </div>
 
         {/* Loading */}
