@@ -1,0 +1,5 @@
+{
+  "name": "Packrat",
+  "description": "AI-powered packing list builder for various trip types and weather conditions.",
+  "requestFramePermissions": []
+}
