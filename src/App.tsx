@@ -55,7 +55,9 @@ export default function App() {
       setItems(generatedItems);
       setAppState('list');
     } catch (e) {
-      setError('Could not generate packing list. Check your Gemini API key and try again.');
+      console.error('Gemini error:', e);
+      const msg = e instanceof Error ? e.message : String(e);
+      setError(`Could not generate packing list: ${msg}`);
       setAppState('input');
     }
   };
